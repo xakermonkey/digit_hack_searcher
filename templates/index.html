@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+
 </head>
 <body>
 
@@ -81,6 +83,12 @@
 
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
+                        <p class="lead ">Получить теги по фото</p>
+
+                    <form action="/file-upload"
+                          class="dropzone"
+                          id="my-awesome-dropzone" style="border-radius: 16px"></form>
+
                     <a href="#" class="btn btn-hero"> Искать<span
                             class="icon-right"></span></a>
                 </div>
@@ -96,25 +104,27 @@
     <div class="container ">
         <div class="row features-section">
             <div class="text-center col-sm-4">
-               <div class="card">
+                <div class="card">
                     <img class="card-img" src="https://i.pinimg.com/736x/c7/7d/4d/c77d4d0b4c9cf156f56a2b9fb412efcf.jpg"
                          alt="Card image">
                 </div>
             </div>
             <div class="text-center col-sm-4">
-               <div class="card">
-                    <img class="card-img" src="https://psy-files.ru/wp-content/uploads/c/5/2/c52056fc68df3123eb33a81978a5511f.jpg"
+                <div class="card">
+                    <img class="card-img"
+                         src="https://psy-files.ru/wp-content/uploads/c/5/2/c52056fc68df3123eb33a81978a5511f.jpg"
                          alt="Card image">
                 </div>
             </div>
             <div class="text-center col-sm-4">
-               <div class="card">
-                    <img class="card-img" src="https://avatars.mds.yandex.net/get-zen_doc/1706621/pub_5fae58044278375e7e470aa8_5fae5a783cce092eaa075512/scale_1200"
+                <div class="card">
+                    <img class="card-img"
+                         src="https://avatars.mds.yandex.net/get-zen_doc/1706621/pub_5fae58044278375e7e470aa8_5fae5a783cce092eaa075512/scale_1200"
                          alt="Card image">
                 </div>
             </div>
             <div class="text-center col-sm-4">
-               <div class="card">
+                <div class="card">
                     <img class="card-img" src="https://images.kinorium.com/movie/backstage/250072/w1500_2760044.jpg"
                          alt="Card image">
                 </div>
@@ -122,10 +132,6 @@
         </div>
     </div>
 </section>
-
-
-
-
 
 
 <!-- Topics -->
@@ -164,6 +170,8 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/select2.min.js' %}"></script>
+<script src="{% static 'js/dropzone.min.js' %}"></script>
+
 <script>
     $(document).ready(function () {
         $('.js-example-basic-multiple').select2();
