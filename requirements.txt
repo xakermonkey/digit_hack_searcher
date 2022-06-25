@@ -1,0 +1,11 @@
+django
+Pillow
+scikit-learn
+Cython
+numpy
+tensorflow
+ruclip==0.0.1
+pickle-mixin
+pandas
+git+https://github.com/openai/CLIP.git
+seaborn
