@@ -7,14 +7,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Knowledge</title>
+    <title>Поиск людей</title>
 
     <!-- CSS -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
 </head>
 <body>
 
@@ -22,56 +24,65 @@
 
 <header id="hero" class="hero overlay">
     <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <a href="/index.html" class="brand">
-                <img src="{% static 'images/logo.png' %}" alt="Knowledge">
-            </a>
+        <div class="container">
+            <div class="navbar-header">
+                {#                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
+                {#                        data-target="#navbar-collapse" aria-expanded="false">#}
+                {#                    <span class="sr-only">Toggle navigation</span>#}
+                {#                    <span class="fa fa-bars"></span>#}
+                {#                </button>#}
+                <a href="/index.html" class="brand">
+                    <img src="{% static 'images/logo.png' %}" alt="Knowledge">
+                </a>
+            </div>
+            {#            <div class="navbar-collapse collapse" id="navbar-collapse">#}
+            {#                <ul class="nav navbar-nav navbar-right">#}
+            {#                    <li>#}
+            {#                        <a href="/">#}
+            {#                            Home#}
+            {#                        </a>#}
+            {#                    </li>#}
+            {#                    <li>#}
+            {#                        <a href="archive.html">#}
+            {#                            Archive#}
+            {#                        </a>#}
+            {#                    </li>#}
+            {#                    <li>#}
+            {#                        <a href="browse.html">#}
+            {#                            Browse#}
+            {#                        </a>#}
+            {#                    </li>#}
+            {#                    <li>#}
+            {#                        <a href="login.html">#}
+            {#                            Login#}
+            {#                        </a>#}
+            {#                    </li>#}
+            {#                    <li>#}
+            {#                        <a href="register.html" class="btn btn-success nav-btn">Sign Up</a>#}
+            {#                    </li>#}
+            {#                </ul>#}
+            {#            </div>#}
         </div>
-        <div class="navbar-collapse collapse" id="navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/">
-                        Home
-                    </a>
-                </li>
-                <li>
-                    <a href="archive.html">
-                        Archive
-                    </a>
-                </li>
-                <li>
-                    <a href="browse.html">
-                        Browse
-                    </a>
-                </li>
-                <li>
-                    <a href="login.html">
-                        Login
-                    </a>
-                </li>
-                <li>
-                     <a href="register.html" class="btn btn-success nav-btn">Sign Up</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    </nav>
     <div class="masthead text-center">
         <div class="container">
-            <div class="row">
+            <div class="row" style="justify-content: center;">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1>Knowledgebase</h1>
-                    <p class="lead text-muted">Sed eget orci eleifend enim mattis suscipit. Suspendisse potenti non ipsum.</p>
+                    <h1>Добровольческий поисково-спасательный отряд «ЛизаАлерт»</h1>
+                    <p class="lead ">Поиск пропавших людей</p>
                     <form>
-                        <input type="text" class="search-field" placeholder="Search Something ... "/>
+                        <input type="text" class="search-field" placeholder="Поиск ... "/>
+                        <p class="lead ">Поиск по тегам</p>
+                        <select class="js-example-basic-multiple search-field"
+                                name="states[]" multiple="multiple">
+                            <option value="AL">Животные</option>
+                            <option value="WY">Автомобили</option>
+                        </select>
+
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
-                    <a href="#" class="btn btn-hero"><span class="icon-git"></span> Github Project<span class="icon-right"></span></a>
+                    <a href="#" class="btn btn-hero"> Искать<span
+                            class="icon-right"></span></a>
                 </div>
             </div>
         </div>
@@ -85,24 +96,27 @@
     <div class="container ">
         <div class="row features-section">
             <div class="text-center col-sm-4">
-                <div class="media-body">
-                    <span class="icon"><img src="{% static 'images/icon/icon1.png' %}" alt=""></span>
-                    <h3>Help & Documentation</h3>
-                    <p class="text-muted">Unlike other Frameworks which try to cover everything, It has been built specifically for wordpress</p>
+               <div class="card">
+                    <img class="card-img" src="https://i.pinimg.com/736x/c7/7d/4d/c77d4d0b4c9cf156f56a2b9fb412efcf.jpg"
+                         alt="Card image">
                 </div>
             </div>
             <div class="text-center col-sm-4">
-                <div class="media-body">
-                    <span class="icon"><img src="{% static 'images/icon/icon2.png' %}" alt=""></span>
-                    <h3>Developer Resources</h3>
-                    <p class="text-muted">An incredibly codex has been created for you to use as reference when developing extensions</p>
+               <div class="card">
+                    <img class="card-img" src="https://psy-files.ru/wp-content/uploads/c/5/2/c52056fc68df3123eb33a81978a5511f.jpg"
+                         alt="Card image">
                 </div>
             </div>
             <div class="text-center col-sm-4">
-                <div class="media-body">
-                    <span class="icon"><img src="{% static 'images/icon/icon3.png' %}" alt=""></span>
-                    <h3>Community Support</h3>
-                    <p>The source code is available on GitHub, you can grab it and twist it to your heart’s content</p>
+               <div class="card">
+                    <img class="card-img" src="https://avatars.mds.yandex.net/get-zen_doc/1706621/pub_5fae58044278375e7e470aa8_5fae5a783cce092eaa075512/scale_1200"
+                         alt="Card image">
+                </div>
+            </div>
+            <div class="text-center col-sm-4">
+               <div class="card">
+                    <img class="card-img" src="https://images.kinorium.com/movie/backstage/250072/w1500_2760044.jpg"
+                         alt="Card image">
                 </div>
             </div>
         </div>
@@ -110,99 +124,15 @@
 </section>
 
 
+
+
+
+
 <!-- Topics -->
 <section class="topics">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <header>
-                    <h2><span class="icon-pages"></span>Explore Topics</h2>
-                    <p>We did our best to cover all topics related to this product. Each section have number which represent number of topic in each category.</p>
-                </header>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="topics-list">
-                            <h3><a href="#"><span class="badge">19</span>Introduction</a></h3>
-                            <ul>
-                                <li><a href="single.html"> How to use this documentation? </a></li>
-                                <li><a href="single.html"> How to find topics? </a></li>
-                                <li><a href="single.html"> What is included and why? </a></li>
-                                <li><a href="single.html"> Basic knowledge requirments. </a></li>
-                                <li><a href="single.html"> Getting Started & What is next. </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="topics-list">
-                            <h3><a href="#"><span class="badge">7</span>Intallation & Activation</a></h3>
-                            <ul>
-                                <li><a href="#"> How to use this documentation? </a></li>
-                                <li><a href="#"> How to find topics? </a></li>
-                                <li><a href="#"> What is included and why? </a></li>
-                                <li><a href="#"> Basic knowledge requirments. </a></li>
-                                <li><a href="#"> Getting Started & What is next. </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="topics-list">
-                            <h3><a href="#"><span class="badge">5</span>Import & Export</a></h3>
-                            <ul>
-                                <li><a href="#"> How to use this documentation? </a></li>
-                                <li><a href="#"> How to find topics? </a></li>
-                                <li><a href="#"> What is included and why? </a></li>
-                                <li><a href="#"> Basic knowledge requirments. </a></li>
-                                <li><a href="#"> Getting Started & What is next. </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="topics-list">
-                            <h3><a href="#"><span class="badge">17</span>Settings & Configuration</a></h3>
-                            <ul>
-                                <li><a href="#"> How to use this documentation? </a></li>
-                                <li><a href="#"> How to find topics? </a></li>
-                                <li><a href="#"> What is included and why? </a></li>
-                                <li><a href="#"> Basic knowledge requirments. </a></li>
-                                <li><a href="#"> Getting Started & What is next. </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <div class="widget widget-support-forum">
-                        <span class="icon icon-forum"></span>
-                            <h4>Looking for help? Join Community</h4>
 
-                            <p>Couldn’t find what your are looking for ? Why not join out support forums and let us help you.</p>
-
-
-                        <a href="#" class="btn btn-success">Support Forum</a>
-                    </div>
-
-                <!--******************************* Lists *******************************-->
-
-                    <div class="pt-50">
-                        <div class="topics-list">
-                            <h3><a href="#"><span class="badge">10</span>API Guide Lines</a></h3>
-                            <ul>
-                                <li><a href="#"> How to use this documentation? </a></li>
-                                <li><a href="#"> How to find topics? </a></li>
-                                <li><a href="#"> What is included and why? </a></li>
-                                <li><a href="#"> Basic knowledge requirments. </a></li>
-                                <li><a href="#"> Getting Started & What is next. </a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-             </div>
-            <div class="topics-btn text-center">
-                <a class="btn btn-default" href="archive.html"><span class="icon-adn"></span> Explore All Topics</a>
-            </div>
         </div>
 
     </div>
@@ -214,18 +144,7 @@
 <section class="support-section text-white section ">
     <div class="container">
         <div class="row">
-            <div class="divider"><i class="fa fa-support"></i></div>
-            <header class="text-center">
-                <h2 class="section-title">Get Support From Real People</h2>
-                <p class="section-subtitle">When you are stuck in something don’t waste your time just let us know we are here to help you</p>
-            </header>
-                <ul class="members">
-                    <li><img src="{% static 'images/u1.png' %}" alt=""></li>
-                    <li><img src="{% static 'images/u2.png' %}" alt=""></li>
-                    <li><img src="{% static 'images/u3.png' %}" alt=""></li>
-                    <li><img src="{% static 'images/u4.png' %}" alt=""></li>
-                    <li><img src="{% static 'images/u5.png' %}" alt=""></li>
-                </ul>
+
         </div>
     </div>
 </section>
@@ -233,53 +152,22 @@
 
 <!-- Call To Action -->
 
-<section class="section">
+<footer>
     <div class="container">
-        <div class="row call-to-action">
-
-                <div class="col-lg-1">
-                     <span class="icon icon-envelope"></span>
-                </div>
-                <div class="col-lg-9">
-                <h3>Contact Us</h3>
-                <p>If you have question which is beyond this knowledgebase Kindly contact us</p>
-                </div>
-            <div class="col-lg-2">
-                <a href="#" class="btn btn-success btn-action">Write to Us Now</a>
-                </div>
+        <div class="row">
 
         </div>
     </div>
-</section>
+</footer>
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-3">
-                    <a href="#" class="brand">
-                        <img src="{% static 'images/logo2.png' %}" alt="Knowledge">
-                        <span class="circle"></span>
-                    </a>
-                </div>
-                <div class="col-lg-7 col-md-5 col-sm-9">
-                    <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="login.html">Login</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-12">
-                    <div class="copyright">
-                        <p>© 2016 knowledge Copyrights</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="{% static 'js/jquery-1.12.3.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/jquery-1.12.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/select2.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 </body>
 </html>
