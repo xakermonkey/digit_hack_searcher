@@ -34,7 +34,9 @@
 
 ## Инструкция по развертыванию
 1. Склонировать проект на диск
-2. Поставить окружение `python3`
-3. Установить зависимости `pip install -r requirements.txt`
-4. Запустить `python manage.py runserver`
-5. Web-приложение доступно по ссылке `http://127.0.0.1:8000/searcher/main`
+2. Ввести команду `cd ../digit_hack`
+3. Поставить окружение `python3` в папку venv
+4. Активировать окружение `source venv/bin/activate` – для Unix; `venv/Scripts/activate.bat` – для Windows
+5. Установить зависимости `pip install -r requirements.txt`
+6. Запустить `python manage.py runserver`
+7. Web-приложение доступно по ссылке `http://127.0.0.1:8000/searcher/main`
