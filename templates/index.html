@@ -66,6 +66,7 @@
             {#            </div>#}
         </div>
     </nav>
+    {% csrf_token %}
     <div class="masthead text-center">
         <div class="container">
             <div class="row" style="justify-content: center;">
@@ -73,23 +74,29 @@
                     <h1>Добровольческий поисково-спасательный отряд «ЛизаАлерт»</h1>
                     <p class="lead ">Поиск пропавших людей</p>
                     <form>
-                        <input type="text" class="search-field" placeholder="Поиск ... "/>
+                        <input type="text" id="text" class="search-field" placeholder="Поиск ... "/>
                         <p class="lead ">Поиск по тегам</p>
-                        <select class="js-example-basic-multiple search-field"
-                                name="states[]" multiple="multiple">
-                            <option value="AL">Животные</option>
-                            <option value="WY">Автомобили</option>
+                        <select id="tags" class="js-example-basic-multiple search-field"
+                                name="states" multiple="multiple">
+                            {% for tag in tags %}
+                                <optgroup label="{{ tag.name }}">
+                                    {% for value in tag.values.all %}
+                                        <option value="{{ tag.id }}_{{ value.value }}">{{ tag.name }}
+                                            - {{ value.name }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endfor %}
                         </select>
 
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
-                        <p class="lead ">Получить теги по фото</p>
+                    <p class="lead ">Получить теги по фото</p>
 
                     <form action="/file-upload"
                           class="dropzone"
                           id="my-awesome-dropzone" style="border-radius: 16px"></form>
 
-                    <a href="#" class="btn btn-hero"> Искать<span
+                    <a id="btn-find" class="btn btn-hero"> Искать<span
                             class="icon-right"></span></a>
                 </div>
             </div>
@@ -102,33 +109,8 @@
 
 <section id="features" class="features bgc-light-gray">
     <div class="container ">
-        <div class="row features-section">
-            <div class="text-center col-sm-4">
-                <div class="card">
-                    <img class="card-img" src="https://i.pinimg.com/736x/c7/7d/4d/c77d4d0b4c9cf156f56a2b9fb412efcf.jpg"
-                         alt="Card image">
-                </div>
-            </div>
-            <div class="text-center col-sm-4">
-                <div class="card">
-                    <img class="card-img"
-                         src="https://psy-files.ru/wp-content/uploads/c/5/2/c52056fc68df3123eb33a81978a5511f.jpg"
-                         alt="Card image">
-                </div>
-            </div>
-            <div class="text-center col-sm-4">
-                <div class="card">
-                    <img class="card-img"
-                         src="https://avatars.mds.yandex.net/get-zen_doc/1706621/pub_5fae58044278375e7e470aa8_5fae5a783cce092eaa075512/scale_1200"
-                         alt="Card image">
-                </div>
-            </div>
-            <div class="text-center col-sm-4">
-                <div class="card">
-                    <img class="card-img" src="https://images.kinorium.com/movie/backstage/250072/w1500_2760044.jpg"
-                         alt="Card image">
-                </div>
-            </div>
+        <div id="result" class="row features-section">
+
         </div>
     </div>
 </section>
@@ -174,7 +156,119 @@
 
 <script>
     $(document).ready(function () {
+
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone(".dropzone", {
+            autoProcessQueue: false,
+            parallelUploads: 1,
+            paramName: "find_img",
+            maxFiles: 1,
+            addRemoveLinks: true,
+            acceptedFiles: "image/*",
+            url: "upload_file",
+            success: function (file, response) {
+                for (let i = 0; i < response.images.length; i++) {
+                    $("#result").append(`<div class="text-center col-sm-4 cards">
+                                            <div class="card">
+                                                <img class="card-img" src="${response.images[i]}"
+                                                     alt="Card image">
+                                            </div>
+                                        </div>`)
+                }
+            }
+        });
+        myDropzone.on("addedfile", function (file) {
+            $("#tags").val(null);
+            $("#tags").attr("disabled", "desabled");
+            $('#text').val("");
+            $('#text').attr("disabled", "desabled");
+        });
+        myDropzone.on("sending", function (file, xhr, formData) {
+            formData.append('csrfmiddlewaretoken', document.getElementsByName('csrfmiddlewaretoken')[0].value)
+        });
+        myDropzone.on("removedfile", function (file) {
+            $("#tags").removeAttr("disabled");
+            $('#text').removeAttr("disabled");
+        })
+        {#myDropzone.on("success", function (file, response) {#}
+        {#    console.log(response);#}
+        {# })#}
+
+
         $('.js-example-basic-multiple').select2();
+        var data = {"csrfmiddlewaretoken": $("input[name='csrfmiddlewaretoken']").val()}
+        $("#btn-find").click(function () {
+            $('.cards').remove();
+            if (myDropzone.files.length === 1) {
+                myDropzone.processQueue();
+                return;
+            }
+            var tags = $('#tags').val();
+            console.log(tags);
+            var text = $('#text').val();
+            if (tags == null && text !== "") {
+                data["text"] = text;
+                $.ajax({
+                    url: "find_text",
+                    method: "post",
+                    data: data,
+                    success: function (data) {
+                        for (let i = 0; i < data.images.length; i++) {
+                            $("#result").append(`<div class="text-center col-sm-4 cards">
+                                            <div class="card">
+                                                <img class="card-img" src="${data.images[i]}"
+                                                     alt="Card image">
+                                            </div>
+                                        </div>`)
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            } else if (tags != null && text === "") {
+                data["tags"] = tags;
+                $.ajax({
+                    url: "find_tags",
+                    method: "post",
+                    data: data,
+                    success: function (data) {
+                        for (let i = 0; i < data.images.length; i++) {
+                            $("#result").append(`<div class="text-center col-sm-4 cards">
+                                            <div class="card">
+                                                <img class="card-img" src="${data.images[i]}"
+                                                     alt="Card image">
+                                            </div>
+                                        </div>`)
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            } else if (tags != null && text !== "") {
+                data["text"] = text;
+                data["tags"] = tags;
+                $.ajax({
+                    url: "find_all",
+                    method: "post",
+                    data: data,
+                    success: function (data) {
+                        for (let i = 0; i < data.images.length; i++) {
+                            $("#result").append(`<div class="text-center col-sm-4 cards">
+                                            <div class="card">
+                                                <img class="card-img" src="${data.images[i]}"
+                                                     alt="Card image">
+                                            </div>
+                                        </div>`)
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                })
+            }
+        })
     });
 </script>
 </body>
